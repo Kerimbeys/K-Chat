@@ -22,21 +22,50 @@
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+      min-height: 300px;
+      overflow-y: auto;
     }
     .message {
       padding: 10px;
-      margin-bottom: 10px;
       border-radius: 5px;
       background: #e0e0e0;
+      word-wrap: break-word;
+    }
+    input[type="text"] {
+      width: 100%;
+      max-width: 500px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
     }
   </style>
 </head>
 <body>
   <h1>K-Chat</h1>
-  <div class="chat-box">
+  <div class="chat-box" id="chatBox">
     <div class="message">Merhaba, K-Chat’e hoş geldiniz!</div>
-    <div class="message">Mesajlarınız burada sade şekilde görünecek.</div>
-    <div class="message">Hızlı ve minimal bir deneyim sunuyoruz.</div>
   </div>
+  <input type="text" id="messageInput" placeholder="Mesajınızı yazın ve Enter'a basın">
+
+  <script>
+    const input = document.getElementById('messageInput');
+    const chatBox = document.getElementById('chatBox');
+
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && input.value.trim() !== '') {
+        const msg = document.createElement('div');
+        msg.className = 'message';
+        msg.textContent = input.value.trim();
+        chatBox.appendChild(msg);
+        chatBox.scrollTop = chatBox.scrollHeight; // Otomatik scroll
+        input.value = '';
+      }
+    });
+  </script>
 </body>
 </html>
