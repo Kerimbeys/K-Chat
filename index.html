@@ -4,68 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>K-Chat</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    h1 { color: #333; }
-    .chat-box {
-      width: 100%;
-      max-width: 500px;
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 20px;
-      min-height: 300px;
-      overflow-y: auto;
-    }
-    .message {
-      padding: 10px;
-      border-radius: 5px;
-      background: #e0e0e0;
-      word-wrap: break-word;
-    }
-    input[type="text"] {
-      width: 100%;
-      max-width: 500px;
-      padding: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-    }
-  </style>
+  <link rel="stylesheet" href="src/styles.css">
 </head>
 <body>
-  <h1>K-Chat</h1>
-  <div class="chat-box" id="chatBox">
-    <div class="message">Merhaba, K-Chat’e hoş geldiniz!</div>
-  </div>
-  <input type="text" id="messageInput" placeholder="Mesajınızı yazın ve Enter'a basın">
+  <main>
+    <section class="app" aria-label="K-Chat sohbet ekranı">
+      <header class="app__header">
+        <h1 class="app__title">K-Chat</h1>
+        <span class="app__badge">Canlı sohbet</span>
+      </header>
 
-  <script>
-    const input = document.getElementById('messageInput');
-    const chatBox = document.getElementById('chatBox');
+      <div class="chat" id="chatBox" role="log" aria-live="polite">
+        <div class="message message--incoming">Merhaba, K-Chat'e hoş geldiniz!</div>
+        <div class="message message--incoming">Bugün size nasıl yardımcı olabiliriz?</div>
+      </div>
 
-    input.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' && input.value.trim() !== '') {
-        const msg = document.createElement('div');
-        msg.className = 'message';
-        msg.textContent = input.value.trim();
-        chatBox.appendChild(msg);
-        chatBox.scrollTop = chatBox.scrollHeight; // Otomatik scroll
-        input.value = '';
-      }
-    });
-  </script>
+      <div class="composer">
+        <input
+          type="text"
+          id="messageInput"
+          class="composer__input"
+          placeholder="Mesajınızı yazın"
+          aria-label="Mesajınızı yazın"
+        >
+        <button class="composer__button" id="sendButton" type="button">Gönder</button>
+      </div>
+      <p class="composer__helper">Göndermek için Enter'a basabilir veya Gönder butonunu kullanabilirsiniz.</p>
+    </section>
+  </main>
+
+  <script src="src/app.js"></script>
 </body>
 </html>
